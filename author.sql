@@ -36,10 +36,10 @@ CREATE TABLE products(
     product_name VARCHAR(255) NOT NULL,
     item_description TEXT,
     price DECIMAL(10, 2) NOT NULL DEFAULT 0 CHECK (price >= 0),
-    stock_quantity  CHECK (stock_quantity >= 0),
+    stock_quantity INT CHECK (stock_quantity >= 0),
     category_ID INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_category
         FOREIGN KEY (category_ID) REFERENCES categories(category_ID)
         ON DELETE RESTRICT
@@ -52,9 +52,9 @@ CREATE TABLE orders(
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     total_amount DECIMAL(10, 2) DEFAULT 0 CHECK (total_amount >= 0),
     status VARCHAR(50) NOT NULL DEFAULT 'Pending' CHECK (status IN ('Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled')),
-    shipping_address TEXT NOT NULL
+    shipping_address TEXT NOT NULL,
     CONSTRAINT fk_customer
-        FOREIGN KEY(customer_ID) REFERENCES customers(customer_ID)
+        FOREIGN KEY (customer_ID) REFERENCES customers(customer_ID)
         ON DELETE RESTRICT
 
 );
@@ -65,7 +65,7 @@ CREATE TABLE order_items(
     order_ID INT NOT NULL,
     product_ID INT NOT NULL,
     quantity INT NOT NULL CHECK (quantity > 0),
-    unit_price DECIMAL(10, 2) NOT NULL CHECK (unit_price >= 0)
+    unit_price DECIMAL(10, 2) NOT NULL CHECK (unit_price >= 0),
     CONSTRAINT fk_order
         FOREIGN KEY (order_ID)
         REFERENCES orders(order_ID)
@@ -73,5 +73,6 @@ CREATE TABLE order_items(
     CONSTRAINT fk_product
         FOREIGN KEY (product_ID)
         REFERENCES products(product_ID)
-        ON DELETE RESTRICT);
+        ON DELETE RESTRICT
+);
 
