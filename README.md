@@ -36,6 +36,6 @@ The task here is to create a database schema for an online store, focusing on pr
 
 ## Important notes
 
-- The **2_data_seeding.sql** is just a dummy set; it isn't a real dataset
-- Scripts are just numbers in the order you should run them
-- Feel free to contribute, I'm looking forward to your your PRs
+- The **2_data_seeding.sql** is just a dummy dataset and it isn't a real 
+- Scripts are numbered in the order you should run them
+- Feel free to contribute, I'm looking forward to your PRs
