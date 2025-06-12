@@ -2,6 +2,7 @@
 -- CREATE DATABASE ecommerceStore;
 -- \c ecommerceStore; -- Use this in psql to connect
 
+--- drop tables if they exist ---
 DROP TABLE IF EXISTS order_items;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS products;
