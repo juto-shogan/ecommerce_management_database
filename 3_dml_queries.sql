@@ -15,6 +15,7 @@ UPDATE products SET stock_quantity = stock_quantity - 1 WHERE product_name IN ('
 UPDATE products SET stock_quantity = stock_quantity - 1 WHERE product_name IN ('Gaming Monitor', 'Smart Refrigerator', 'Smart Washing Machine');
 UPDATE products SET stock_quantity = stock_quantity - 1 WHERE product_name IN ('Smart Coffee Maker', 'Smart Vacuum Cleaner');
 UPDATE products SET stock_quantity = stock_quantity - 1 WHERE product_name IN ('Wireless Mouse', 'Keyboard', 'External Hard Drive', 'Monitor');
+--- the above code is to update the stock quantity of products after an order is placed. ---
 
 --- Calculating the total price of an order. ---
 SELECT SUM(price) FROM products WHERE product_name IN ('Laptop', 'Smartphone');
