@@ -1,6 +1,6 @@
 # ecommerce_database_management
 
-This is my first SQL project, so it can be better.<br>
+This is my first SQL project, a base layout for an e-commerce database.<br>
 The aim of this is to showcase my skill in SQL, specifically **Postgresql**
 
 ## Database and Tools
