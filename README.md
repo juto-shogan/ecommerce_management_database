@@ -18,6 +18,7 @@ The task here is to create a database schema for an online store, focusing on pr
 - Customers
 - Orders
 - OrderItems
+- ![Alt text for EDR](images/EDR.png)
 
 ### Analysis Queries to Showcase
 
