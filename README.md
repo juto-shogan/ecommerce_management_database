@@ -86,7 +86,5 @@ The project is structured into three main SQL files, guiding you through the com
 
 ## Author
 
-Somto Mbonu
-
-Aspiring Penetration Tester & Machine Learning Engineer
+Somto Mbonu<br/>
 GitHub Profile: [https://github.com/juto-shogan/]
