@@ -42,8 +42,9 @@ CREATE TABLE products(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_category
-        FOREIGN KEY (category_ID) REFERENCES categories(category_ID) -- foreign key constraint to  link categories and products
-        ON DELETE RESTRICT
+        FOREIGN KEY (category_ID) REFERENCES categories(category_ID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 --- orders table
@@ -52,12 +53,12 @@ CREATE TABLE orders(
     customer_ID INT NOT NULL,
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     total_amount DECIMAL(10, 2) DEFAULT 0 CHECK (total_amount >= 0),
-    status VARCHAR(50) NOT NULL DEFAULT 'Pending' CHECK (status IN ('Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled')), -- status of the order
+    status VARCHAR(50) NOT NULL DEFAULT 'Pending' CHECK (status IN ('Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled')),
     shipping_address TEXT NOT NULL,
     CONSTRAINT fk_customer
-        FOREIGN KEY (customer_ID) REFERENCES customers(customer_ID) -- foreign key constraint to link customers and orders
-        ON DELETE RESTRICT
-
+        FOREIGN KEY (customer_ID) REFERENCES customers(customer_ID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 --- orderedItems table
@@ -69,11 +70,12 @@ CREATE TABLE order_items(
     unit_price DECIMAL(10, 2) NOT NULL CHECK (unit_price >= 0),
     CONSTRAINT fk_order
         FOREIGN KEY (order_ID)
-        REFERENCES orders(order_ID) -- foreign key constraint to link orders and orderItems
-        ON DELETE CASCADE, 
+        REFERENCES orders(order_ID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     CONSTRAINT fk_product
         FOREIGN KEY (product_ID)
-        REFERENCES products(product_ID) -- foreign key constraint to link products and orderItems
-        ON DELETE RESTRICT
+        REFERENCES products(product_ID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
-

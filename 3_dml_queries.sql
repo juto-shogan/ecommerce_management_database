@@ -134,3 +134,62 @@ SELECT product_ID, SUM(quantity) as total_sold
 FROM order_items
 GROUP BY product_ID
 ORDER BY total_sold DESC;
+-- 1. Increase stock for a product after restock
+UPDATE products SET stock_quantity = stock_quantity + 10 WHERE product_name = 'Laptop';
+
+-- 2. Change the price of a product
+UPDATE products SET price = 999.99 WHERE product_name = 'Smartphone';
+
+-- 3. Delete discontinued product
+DELETE FROM products WHERE product_name = 'Old Model Tablet';
+
+-- 4. Add a new product
+INSERT INTO products (product_name, category_ID, price, stock_quantity) VALUES ('Noise Cancelling Headphones', 2, 199.99, 50);
+
+-- 5. Update customer email
+UPDATE customers SET email = 'newemail@example.com' WHERE customer_ID = 1;
+
+-- 6. Remove an order
+DELETE FROM orders WHERE order_ID = 10;
+
+-- 7. Add a new order
+INSERT INTO orders (order_ID, customer_ID, order_date, status) VALUES (101, 2, '2024-06-01', 'Pending');
+
+-- 8. Update order status
+UPDATE orders SET status = 'Shipped' WHERE order_ID = 5;
+
+-- 9. Add an item to an order
+INSERT INTO order_items (order_ID, product_ID, quantity, unit_price) VALUES (101, 12, 2, 1200.00);
+
+-- 10. Remove an item from an order
+DELETE FROM order_items WHERE order_ID = 5 AND product_ID = 18;
+
+-- 11. Change product category
+UPDATE products SET category_ID = 3 WHERE product_name = 'Smartwatch';
+
+-- 12. Set all out-of-stock products to inactive
+UPDATE products SET active = 0 WHERE stock_quantity = 0;
+-- Find customers who have placed more than 5 orders and spent over $5000 in total
+SELECT c.customer_ID, c.customer_name, COUNT(o.order_ID) AS total_orders, SUM(oi.quantity * oi.unit_price) AS total_spent
+FROM customers c
+JOIN orders o ON c.customer_ID = o.customer_ID
+JOIN order_items oi ON o.order_ID = oi.order_ID
+GROUP BY c.customer_ID, c.customer_name
+HAVING COUNT(o.order_ID) > 5 AND SUM(oi.quantity * oi.unit_price) > 5000;
+
+-- List products that have never been ordered
+SELECT p.product_ID, p.product_name
+FROM products p
+LEFT JOIN order_items oi ON p.product_ID = oi.product_ID
+WHERE oi.product_ID IS NULL;
+
+-- Show the average order value per customer
+SELECT c.customer_ID, c.customer_name, AVG(order_total) AS avg_order_value
+FROM customers c
+JOIN (
+    SELECT o.order_ID, o.customer_ID, SUM(oi.quantity * oi.unit_price) AS order_total
+    FROM orders o
+    JOIN order_items oi ON o.order_ID = oi.order_ID
+    GROUP BY o.order_ID, o.customer_ID
+) order_summary ON c.customer_ID = order_summary.customer_ID
+GROUP BY c.customer_ID, c.customer_name;

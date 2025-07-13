@@ -1,3 +1,5 @@
+BEGIN;
+
 -- insert 50 categories
 INSERT INTO categories (category_ID, category_name, description) VALUES
 (1, 'Laptops', 'Portable personal computers'),
@@ -279,3 +281,5 @@ INSERT INTO orders (customer_ID, order_date, total_amount, shipping_address) VAL
 (48, '2024-01-13', 75.00, '3315 Dogwood St,Springfield,IL'),
 (49, '2024-01-14', 400.00, '3417 Maple St,Springfield,IL'),
 (50, '2024-01-15', 250.00, '3519 Oak St,Springfield,IL');
+
+END;
